@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 	"os"
+	"runtime/debug"
 
 	"github.com/spf13/cobra"
 )
@@ -14,10 +15,20 @@ var (
 	noCache    bool
 )
 
+func getVersion() string {
+	if version != "dev" {
+		return version
+	}
+	if info, ok := debug.ReadBuildInfo(); ok && info.Main.Version != "" && info.Main.Version != "(devel)" {
+		return info.Main.Version
+	}
+	return version
+}
+
 var rootCmd = &cobra.Command{
 	Use:     "earnings-cal-cli",
 	Short:   "Earnings calendar CLI — track upcoming and past earnings reports",
-	Version: version,
+	Version: getVersion(),
 }
 
 func Execute() error {
