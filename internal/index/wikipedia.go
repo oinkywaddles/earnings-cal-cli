@@ -11,7 +11,7 @@ import (
 )
 
 var indexPages = map[string]string{
-	"sp500":     "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies",
+	"sp100":    "https://en.wikipedia.org/wiki/S%26P_100",
 	"nasdaq100": "https://en.wikipedia.org/wiki/Nasdaq-100",
 	"dowjones":  "https://en.wikipedia.org/wiki/Dow_Jones_Industrial_Average",
 }
@@ -20,26 +20,26 @@ var indexPages = map[string]string{
 func FetchAllConstituents() (*Constituents, error) {
 	client := &http.Client{Timeout: 30 * time.Second}
 
-	sp500, err := fetchAndParse(client, indexPages["sp500"], parseSP500)
+	sp100, err := fetchAndParse(client, indexPages["sp100"], parseSymbolTable)
 	if err != nil {
-		return nil, fmt.Errorf("S&P 500: %w", err)
+		return nil, fmt.Errorf("S&P 100: %w", err)
 	}
 
-	nasdaq100, err := fetchAndParse(client, indexPages["nasdaq100"], parseNasdaq100)
+	nasdaq100, err := fetchAndParse(client, indexPages["nasdaq100"], parseSymbolTable)
 	if err != nil {
 		return nil, fmt.Errorf("NASDAQ 100: %w", err)
 	}
 
-	dowjones, err := fetchAndParse(client, indexPages["dowjones"], parseDowJones)
+	dowjones, err := fetchAndParse(client, indexPages["dowjones"], parseSymbolTable)
 	if err != nil {
 		return nil, fmt.Errorf("Dow Jones: %w", err)
 	}
 
-	merged := mergeSymbols(sp500, nasdaq100, dowjones)
+	merged := mergeSymbols(sp100, nasdaq100, dowjones)
 
 	return &Constituents{
 		UpdatedAt: time.Now().UTC(),
-		SP500:     sp500,
+		SP100:     sp100,
 		Nasdaq100: nasdaq100,
 		DowJones:  dowjones,
 		Merged:    merged,
@@ -120,20 +120,6 @@ func parseSymbolTable(r io.Reader) ([]string, error) {
 	return nil, fmt.Errorf("no table with Symbol/Ticker column found")
 }
 
-// parseSP500 parses the S&P 500 wiki page.
-func parseSP500(r io.Reader) ([]string, error) {
-	return parseSymbolTable(r)
-}
-
-// parseNasdaq100 parses the NASDAQ 100 wiki page.
-func parseNasdaq100(r io.Reader) ([]string, error) {
-	return parseSymbolTable(r)
-}
-
-// parseDowJones parses the Dow Jones wiki page.
-func parseDowJones(r io.Reader) ([]string, error) {
-	return parseSymbolTable(r)
-}
 
 // findCells returns all direct th and td children of a tr (in order).
 func findCells(row *html.Node) []*html.Node {

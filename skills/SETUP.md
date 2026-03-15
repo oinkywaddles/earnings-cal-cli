@@ -39,7 +39,7 @@ When set, `list` uses this as the default filter instead of index constituents.
 
 ## Initialize index cache
 
-Pre-cache S&P 500, NASDAQ 100, and Dow Jones constituents (fetched from Wikipedia, cached 90 days):
+Pre-cache S&P 100, NASDAQ 100, and Dow Jones constituents (fetched from Wikipedia, cached 90 days):
 
 ```bash
 earnings-cal-cli init

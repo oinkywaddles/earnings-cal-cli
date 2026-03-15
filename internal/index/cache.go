@@ -16,7 +16,7 @@ const (
 // Constituents holds index constituent symbols.
 type Constituents struct {
 	UpdatedAt time.Time `json:"updated_at"`
-	SP500     []string  `json:"sp500"`
+	SP100     []string  `json:"sp100"`
 	Nasdaq100 []string  `json:"nasdaq100"`
 	DowJones  []string  `json:"dowjones"`
 	Merged    []string  `json:"merged"`

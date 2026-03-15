@@ -83,7 +83,7 @@ func TestFilterDesc(t *testing.T) {
 	if got := FilterDesc(nil, false, "AAPL,MSFT"); got != "Watchlist: AAPL,MSFT" {
 		t.Errorf("got %q", got)
 	}
-	if got := FilterDesc(nil, false, ""); !strings.Contains(got, "S&P 500") {
+	if got := FilterDesc(nil, false, ""); !strings.Contains(got, "S&P 100") {
 		t.Errorf("got %q", got)
 	}
 }

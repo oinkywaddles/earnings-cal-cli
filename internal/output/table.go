@@ -81,6 +81,6 @@ func FilterDesc(symbols []string, all bool, watchlist string) string {
 	case watchlist != "":
 		return "Watchlist: " + watchlist
 	default:
-		return "S&P 500 ∪ NASDAQ 100 ∪ Dow Jones"
+		return "S&P 100 ∪ NASDAQ 100 ∪ Dow Jones"
 	}
 }

@@ -1,6 +1,6 @@
 # earnings-cal-cli
 
-CLI tool to query upcoming and past earnings reports for US stocks. Data sourced from [Finnhub](https://finnhub.io/), filtered by S&P 500, NASDAQ 100, and Dow Jones constituents.
+CLI tool to query upcoming and past earnings reports for US stocks. Data sourced from [Finnhub](https://finnhub.io/), filtered by S&P 100, NASDAQ 100, and Dow Jones constituents.
 
 ## Install
 
@@ -38,7 +38,7 @@ Output:
 
 ```
 Earnings Calendar: 2026-03-09 ~ 2026-03-15
-Source: S&P 500 ∪ NASDAQ 100 ∪ Dow Jones | 3 results
+Source: S&P 100 ∪ NASDAQ 100 ∪ Dow Jones | 3 results
 
 | Date       | Symbol | Hour | Quarter   | EPS Est | EPS Act | Rev Est | Rev Act |
 |------------|--------|------|-----------|---------|---------|---------|---------|

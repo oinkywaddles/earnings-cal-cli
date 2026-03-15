@@ -1,12 +1,12 @@
 ---
 name: earnings-cal
-description: Query upcoming and past earnings reports for US stocks
+description: Query earnings calendar and key metrics (EPS, revenue) for US stocks
 tools: [Bash]
 ---
 
 # Earnings Calendar CLI
 
-Query earnings calendar data (EPS, revenue estimates/actuals) for S&P 500, NASDAQ 100, and Dow Jones stocks via Finnhub API.
+Query earnings calendar data (EPS, revenue estimates/actuals) for S&P 100, NASDAQ 100, and Dow Jones stocks via Finnhub API.
 
 - Setup/install issues → read `skills/SETUP.md`
 - Errors during use → read `skills/TROUBLESHOOTING.md`
@@ -72,7 +72,7 @@ Default output is Markdown table (list) or structured text (detail). Use `--json
 ```json
 {
   "range": { "from": "2026-03-09", "to": "2026-03-15" },
-  "filter": "S&P 500 ∪ NASDAQ 100 ∪ Dow Jones",
+  "filter": "S&P 100 ∪ NASDAQ 100 ∪ Dow Jones",
   "count": 12,
   "earnings": [
     {
@@ -103,13 +103,14 @@ When `--json` is used and an error occurs, output is:
 ## Filter priority
 
 ```
---symbols flag > EARNINGS_WATCHLIST env > index constituents (S&P 500 ∪ NASDAQ 100 ∪ Dow Jones)
+--symbols flag > EARNINGS_WATCHLIST env > index constituents (S&P 100 ∪ NASDAQ 100 ∪ Dow Jones)
 --all skips all filtering
 ```
 
 ## Usage guidelines
 
-- Prefer `--json` for parsing results programmatically
+- Default table output is human-readable, can be shown to users directly
+- Use `--json` only when you need to compute on the data (e.g., filter by EPS surprise)
 - Use `--symbols` when the user asks about specific stocks — avoids loading index constituents
 - Use `--today` or `--tomorrow` for narrow queries to minimize response size
 - Do not pass more than 20 symbols to `detail`

@@ -11,7 +11,7 @@ import (
 var initCmd = &cobra.Command{
 	Use:   "init",
 	Short: "Initialize or refresh index constituents cache",
-	Long:  "Fetch S&P 500, NASDAQ 100, and Dow Jones constituents from Wikipedia and cache locally.",
+	Long:  "Fetch S&P 100, NASDAQ 100, and Dow Jones constituents from Wikipedia and cache locally.",
 	Run:   runInit,
 }
 
@@ -32,6 +32,6 @@ func runInit(cmd *cobra.Command, args []string) {
 		exitWithError("failed to fetch index constituents: " + err.Error())
 	}
 
-	fmt.Printf("Cached %d symbols (S&P 500: %d, NASDAQ 100: %d, Dow Jones: %d), valid 90 days\n",
-		len(c.Merged), len(c.SP500), len(c.Nasdaq100), len(c.DowJones))
+	fmt.Printf("Cached %d symbols (S&P 100: %d, NASDAQ 100: %d, Dow Jones: %d), valid 90 days\n",
+		len(c.Merged), len(c.SP100), len(c.Nasdaq100), len(c.DowJones))
 }
